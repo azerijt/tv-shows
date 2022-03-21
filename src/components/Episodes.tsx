@@ -1,6 +1,6 @@
 import episodes from "../episodes.json";
 import { clean } from "../utils/clean";
-import generateEpisodeCode from "../utils/GenerateEpisodeCode";
+import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
 
 export interface IEpisode {
   id: number;
@@ -27,20 +27,20 @@ function Episode(): JSX.Element {
   return (
     <>
       <div className="Container">
-        {episodeData.map((episodeInfo) => (
-          <section className="GOT" key={episodeInfo.id}>
-            <h1>Episode: {episodeInfo.name}</h1>
-            <h3>
-              S:{episodeInfo.season} Ep:{episodeInfo.number}
-            </h3>
-            <img src={episodeInfo.image.medium} alt="" />
-            <br />
-            {episodeInfo.summary}
-          </section>
-        ))}
+      {episodeData.map((episodeInfo) => (
+        <section className="GOT" key={episodeInfo.id}>
+          <h1>
+            Episode:
+            <a href={episodeInfo.url}>{episodeInfo.name}</a>
+          </h1>
+          <h3>{GenerateEpisodeCode(episodeInfo.season, episodeInfo.number)}</h3>
+          <img src={episodeInfo.image.medium} alt="" />
+          <br />
+          {clean(episodeInfo.summary)}
+        </section>
+      ))}
       </div>
-     </>
+    </>
   );
 }
-
 export default Episode;
