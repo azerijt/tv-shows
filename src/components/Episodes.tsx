@@ -24,20 +24,19 @@ const episodeData: IEpisode[] = episodes;
 function Episode(): JSX.Element {
   return (
     <>
-    <div className="Container">
-
-    {episodeData.map((episodeInfo) => (
-        <section className="GOT" key={episodeInfo.id}>
-          <h1>Episode: {episodeInfo.name}</h1>
-          <h3>
-            S:{episodeInfo.season} Ep:{episodeInfo.number}
-          </h3>
-          <img src={episodeInfo.image.medium} alt="" />
-          <br />
-          {episodeInfo.summary}
-        </section>
-      ))}
-    </div>
+      <div className="Container">
+        {episodeData.map((episodeInfo) => (
+          <section className="GOT" key={episodeInfo.id}>
+            <h1>Episode: {episodeInfo.name}</h1>
+            <h3>
+              S:{episodeInfo.season} Ep:{episodeInfo.number}
+            </h3>
+            <img src={episodeInfo.image.medium} alt="" />
+            <br />
+            {episodeInfo.summary}
+          </section>
+        ))}
+      </div>
     </>
   );
 }
