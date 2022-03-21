@@ -24,8 +24,10 @@ const episodeData: IEpisode[] = episodes;
 function Episode(): JSX.Element {
   return (
     <>
-      {episodeData.map((episodeInfo) => (
-        <section key={episodeInfo.id}>
+    <div className="Container">
+
+    {episodeData.map((episodeInfo) => (
+        <section className="GOT" key={episodeInfo.id}>
           <h1>Episode: {episodeInfo.name}</h1>
           <h3>
             S:{episodeInfo.season} Ep:{episodeInfo.number}
@@ -35,6 +37,7 @@ function Episode(): JSX.Element {
           {episodeInfo.summary}
         </section>
       ))}
+    </div>
     </>
   );
 }
