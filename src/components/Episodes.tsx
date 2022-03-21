@@ -1,6 +1,7 @@
 import episodes from "../episodes.json";
+import {clean} from "../utils/clean"
 
-interface IEpisode {
+export interface IEpisode {
   id: number;
   url: string;
   name: string;
@@ -19,7 +20,7 @@ interface IEpisode {
   _links: { self: { href: string } };
 }
 
-const episodeData: IEpisode[] = episodes;
+export const episodeData: IEpisode[] = episodes;
 
 function Episode(): JSX.Element {
   return (
@@ -32,7 +33,7 @@ function Episode(): JSX.Element {
           </h3>
           <img src={episodeInfo.image.medium} alt="" />
           <br />
-          {episodeInfo.summary}
+          {clean(episodeInfo.summary)}
         </section>
       ))}
     </>
