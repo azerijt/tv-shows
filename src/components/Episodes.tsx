@@ -26,8 +26,9 @@ export const episodeData: IEpisode[] = episodes;
 function Episode(): JSX.Element {
   return (
     <>
+      <div className="Container">
       {episodeData.map((episodeInfo) => (
-        <section key={episodeInfo.id}>
+        <section className="GOT" key={episodeInfo.id}>
           <h1>
             Episode:
             <a href={episodeInfo.url}>{episodeInfo.name}</a>
@@ -38,8 +39,8 @@ function Episode(): JSX.Element {
           {clean(episodeInfo.summary)}
         </section>
       ))}
+      </div>
     </>
   );
 }
-
 export default Episode;
