@@ -1,4 +1,5 @@
 import episodes from "../episodes.json";
+import generateEpisodeCode from "../utils/GenerateEpisodeCode"
 
 interface IEpisode {
   id: number;
@@ -28,7 +29,7 @@ function Episode(): JSX.Element {
         <section key={episodeInfo.id}>
           <h1>Episode: {episodeInfo.name}</h1>
           <h3>
-            S:{episodeInfo.season} Ep:{episodeInfo.number}
+            {generateEpisodeCode(episodeInfo.season,episodeInfo.number)}
           </h3>
           <img src={episodeInfo.image.medium} alt="" />
           <br />
