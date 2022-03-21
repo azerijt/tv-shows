@@ -26,7 +26,10 @@ function Episode(): JSX.Element {
     <>
       {episodeData.map((episodeInfo) => (
         <section key={episodeInfo.id}>
-          <h1>Episode: {episodeInfo.name}</h1>
+          <h1>
+            Episode:
+            <a href={episodeInfo.url}>{episodeInfo.name}</a>
+          </h1>
           <h3>
             S:{episodeInfo.season} Ep:{episodeInfo.number}
           </h3>
