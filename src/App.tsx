@@ -1,12 +1,11 @@
-import Episode from "./components/Episodes"
+import Episode from "./components/Episodes";
 
 function App(): JSX.Element {
-  return(
+  return (
     <>
-  <Episode />
-  </>
-  )}
-
-
+      <Episode />
+    </>
+  );
+}
 
 export default App;
