@@ -1,5 +1,5 @@
 import episodes from "../episodes.json";
-import {clean} from "../utils/clean"
+import { clean } from "../utils/clean";
 
 export interface IEpisode {
   id: number;
