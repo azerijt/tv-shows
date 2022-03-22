@@ -44,6 +44,9 @@ function Episode(): JSX.Element {
             setSearchValue(event.target.value);
           }}
         />
+        <br />
+        Showing {filteredEpisodeData.length} of {episodeData.length} Total
+        Episodes
         {filteredEpisodeData.map((episodeInfo) => (
           <section className="GOT" key={episodeInfo.id}>
             <h1>
