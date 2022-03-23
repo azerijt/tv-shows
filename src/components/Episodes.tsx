@@ -1,3 +1,4 @@
+import { useState } from "react";
 import episodes from "../episodes.json";
 import { clean } from "../utils/clean";
 import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
@@ -24,10 +25,29 @@ export interface IEpisode {
 export const episodeData: IEpisode[] = episodes;
 
 function Episode(): JSX.Element {
+  const [searchValue, setSearchValue] = useState<string>("");
+  const filteredEpisodeData = episodeData.filter(searchfunction);
+  function searchfunction(oneEpisode: IEpisode) {
+    return (
+      oneEpisode.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      oneEpisode.summary.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }
+
   return (
     <>
       <div className="Container">
-        {episodeData.map((episodeInfo) => (
+        <input
+          placeholder="Search"
+          value={searchValue}
+          onChange={(event) => {
+            setSearchValue(event.target.value);
+          }}
+        />
+        <br />
+        Showing {filteredEpisodeData.length} of {episodeData.length} Total
+        Episodes
+        {filteredEpisodeData.map((episodeInfo) => (
           <section className="GOT" key={episodeInfo.id}>
             <h1>
               Episode:
