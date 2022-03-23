@@ -1,6 +1,6 @@
 import { useState } from "react";
 //import episodes from "../episodes.json";
-import simpsonseps from "../simpsonseps.json"
+import simpsonseps from "../simpsonseps.json";
 import { clean } from "../utils/clean";
 import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
 
@@ -24,7 +24,6 @@ export interface IEpisode {
 }
 
 //export const episodeData: IEpisode[] = episodes;
-
 
 export const episodeData = simpsonseps;
 
@@ -59,8 +58,7 @@ function Episode(): JSX.Element {
             <h3>
               {GenerateEpisodeCode(episodeInfo.season, episodeInfo.number)}
             </h3>
-            {episodeInfo.image && (
-            <img src={episodeInfo.image.medium} alt="" />)}
+            {episodeInfo.image && <img src={episodeInfo.image.medium} alt="" />}
             {episodeInfo.image === null && <i>Image Unavailable</i>}
             <br />
             {clean(episodeInfo.summary)}
