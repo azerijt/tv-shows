@@ -1,5 +1,6 @@
 import { useState } from "react";
 import episodes from "../episodes.json";
+import simpsonseps from "../simpsonseps.json"
 import { clean } from "../utils/clean";
 import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
 
@@ -14,7 +15,7 @@ export interface IEpisode {
   airtime: string;
   airstamp: string;
   runtime: number;
-  image: {
+  image: null | {  
     medium: string;
     original: string;
   };
@@ -22,7 +23,8 @@ export interface IEpisode {
   _links: { self: { href: string } };
 }
 
-export const episodeData: IEpisode[] = episodes;
+//export const episodeData: IEpisode[] = episodes;
+export const episodeData = simpsonseps;
 
 function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -56,12 +58,13 @@ function Episode(): JSX.Element {
             <h3>
               {GenerateEpisodeCode(episodeInfo.season, episodeInfo.number)}
             </h3>
-            <img src={episodeInfo.image.medium} alt="" />
+            {episodeInfo.image && (
+            <img src={episodeInfo.image.medium} alt="" />)}
+            {episodeInfo.image === null && <i>Image Unavailable</i>}
             <br />
             {clean(episodeInfo.summary)}
-            <br/>
+            <br />
           </section>
-          
         ))}
       </div>
     </>
