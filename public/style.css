@@ -1,14 +1,49 @@
-.GOT{
+.page{
+    background-color: rgb(74, 88, 172);
+}
+
+.Container{
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+       
 }
 
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.title{
+    font-family: "Gill sans", sans-serif;
+    font-style: oblique;
+    font-size: xx-large;
+    color: rgb(248, 227, 106);
+    
+}
+.EpisodeTitle{
+    color: rgb(39, 64, 112);
+    
+}
+.GOT{
+    
+    border: 2px solid rgb(7, 7, 37);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px;
+    color: rgb(7, 7, 37);
+    padding-left: 5px;
+    padding-right:5px;
+    background-color:rgb(233, 245, 245);
+    width: 350px;
+    height: 450px;
+    display: inline-block;
+    
+    
+    
+   
+    
 }
 
-img{
+
+
+
+
+.img{
     display: block;
     margin-left: auto;
     margin-right: auto;

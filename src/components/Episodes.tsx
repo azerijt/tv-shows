@@ -38,35 +38,46 @@ function Episode(): JSX.Element {
   }
 
   return (
-    <>
+    <div className="page">
       <div className="Container">
-        <input
-          placeholder="Search"
-          value={searchValue}
-          onChange={(event) => {
-            setSearchValue(event.target.value);
-          }}
-        />
         <br />
-        Showing {filteredEpisodeData.length} of {episodeData.length} Total
-        Episodes
+        <div className="title">
+          <h1>TV Shows App</h1>
+          <input
+            placeholder="Search"
+            value={searchValue}
+            onChange={(event) => {
+              setSearchValue(event.target.value);
+            }}
+          />
+          {searchValue && (
+            <p>
+              Showing {filteredEpisodeData.length} of {episodeData.length} Total
+              Episodes{" "}
+            </p>
+          )}
+        </div>
+
         {filteredEpisodeData.map((episodeInfo) => (
           <section className="GOT" key={episodeInfo.id}>
-            <h1>
-              <a href={episodeInfo.url}>{episodeInfo.name}</a>
-            </h1>
+            <h1 className="EpisodeTitle">{episodeInfo.name}</h1>
             <h3>
-              {GenerateEpisodeCode(episodeInfo.season, episodeInfo.number)}
+              <a className="EpisodeTitle" href={episodeInfo.url}>
+                {GenerateEpisodeCode(episodeInfo.season, episodeInfo.number)}
+              </a>
             </h3>
-            {episodeInfo.image && <img src={episodeInfo.image.medium} alt="" />}
+            {episodeInfo.image && (
+              <img className="img" src={episodeInfo.image.medium} alt="" />
+            )}
             {episodeInfo.image === null && <i>Image Unavailable</i>}
+            <br />
             <br />
             {clean(episodeInfo.summary)}
             <br />
           </section>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 export default Episode;
