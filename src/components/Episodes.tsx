@@ -39,7 +39,9 @@ function Episode(): JSX.Element {
             <img src={episodeInfo.image.medium} alt="" />
             <br />
             {clean(episodeInfo.summary)}
+            <br/>
           </section>
+          
         ))}
       </div>
     </>
