@@ -34,24 +34,29 @@ function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
-  const [showSelect, setShowSelect] = useState<number>(82);
+  const [showSelect, setShowSelect] = useState<string>("Kirby Buckets");
 
-const showDataArray: IShow[] = shows;
+  const showDataArray: IShow[] = [...shows];
 
-const targetShow = showDataArray.filter(findShow);
+  const targetShow = showDataArray.filter(findShow);
+  const thingtochange = targetShow[0].id;
 
-function findShow(oneShow: IShow){
-  return (oneShow.id === (showSelect))
-}
+  function findShow(oneShow: IShow) {
+    return oneShow.name.includes(showSelect);
+  }
 
   useEffect(() => {
     const handleGetData = async () => {
-      const response = await fetch(`https://api.tvmaze.com/shows/${targetShow.id}/episodes")`;
-      const jsonBody: IEpisode[] = await response.json();
-      setEpisodeData(jsonBody);
+      if (thingtochange) {
+        const response = await fetch(
+          `https://api.tvmaze.com/shows/${thingtochange}/episodes`
+        );
+        const jsonBody: IEpisode[] = await response.json();
+        setEpisodeData(jsonBody);
+      }
     };
     handleGetData();
-  }, []);
+  }, [thingtochange]);
 
   const episodeDataArray = [...episodeData];
 
@@ -79,11 +84,15 @@ function findShow(oneShow: IShow){
             }}
           />
           <br />
-          <select name="shows" id="shows"
+          <select
+            name="shows"
+            id="shows"
             onChange={(event) => {
-              setShowSelect(event.target.value)}}>
+              setShowSelect(event.target.value);
+            }}
+          >
             {showDataArray.map((oneShow) => (
-              <option value={targetShow.id} key={oneShow.id}>
+              <option value={oneShow.name} key={oneShow.id}>
                 {oneShow.name}
               </option>
             ))}
