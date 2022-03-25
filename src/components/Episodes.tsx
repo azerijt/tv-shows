@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
-//import episodes from "../episodes.json";
-//import simpsonseps from "../simpsonseps.json";
 import { clean } from "../utils/clean";
 import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
-//import handleGetData from "./FetchEpisodeData";
+import shows from "../shows.json";
+
+export interface IShow {
+  id: number;
+  url: string;
+  name: string;
+  image: { medium: string; original: string };
+  summary: string;
+  genre: string;
+}
 
 export interface IEpisode {
   id: number;
@@ -24,18 +31,17 @@ export interface IEpisode {
   _links: { self: { href: string } };
 }
 
-//export const episodeData: IEpisode[] = episodes;
-
-// export const episodeData = simpsonseps;
-
 function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
+  const [showData, setShowData] = useState<IShow[]>([]);
+
+  const showDataArray=[...showData]
 
   useEffect(() => {
     const handleGetData = async () => {
-      const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+      const response = await fetch(`https://api.tvmaze.com/shows/${showData.id}/episodes")`;
       const jsonBody: IEpisode[] = await response.json();
       setEpisodeData(jsonBody);
     };
@@ -53,11 +59,6 @@ function Episode(): JSX.Element {
       oneEpisode.name.toLowerCase().includes(epsiodeSelect.toLowerCase())
     );
   }
-  // handleGetData();
-  // function handleOnchange = (event) => {
-  //   const show = event.target;
-  //   setEpisodeSelect(show)
-  // }
 
   return (
     <div className="page">
@@ -73,7 +74,13 @@ function Episode(): JSX.Element {
             }}
           />
           <br />
-          {/* <label> Choose an Episode:</label> */}
+          <select name="shows" id="shows">
+            {shows.map((oneShow) => (
+              <option value={oneShow.id} key={oneShow.id}>
+                {oneShow.name}
+              </option>
+            ))}
+          </select>
           <select
             name="epsiodes"
             id="episode"
