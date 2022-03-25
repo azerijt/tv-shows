@@ -31,6 +31,7 @@ export interface IEpisode {
 function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
+  const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
 
   const handleGetData = async () => {
     const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
@@ -44,11 +45,17 @@ function Episode(): JSX.Element {
 
   function searchfunction(oneEpisode: IEpisode) {
     return (
-      oneEpisode.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      oneEpisode.summary.toLowerCase().includes(searchValue.toLowerCase())
+      (oneEpisode.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        oneEpisode.summary.toLowerCase().includes(searchValue.toLowerCase())) &&
+      oneEpisode.name.toLowerCase().includes(epsiodeSelect.toLowerCase())
     );
   }
   handleGetData();
+  // function handleOnchange = (event) => {
+  //   const show = event.target;
+  //   setEpisodeSelect(show)
+  // }
+
   return (
     <div className="page">
       <div className="Container">
@@ -62,6 +69,22 @@ function Episode(): JSX.Element {
               setSearchValue(event.target.value);
             }}
           />
+          <br />
+          {/* <label> Choose an Episode:</label> */}
+          <select
+            name="epsiodes"
+            id="episode"
+            onChange={(event) => {
+              setEpisodeSelect(event.target.value);
+            }}
+          >
+            <option>All Episodes</option>
+            {episodeDataArray.map((oneEpi) => (
+              <option value={oneEpi.name} key={oneEpi.id}>
+                {oneEpi.name + " Ep" + oneEpi.number}
+              </option>
+            ))}
+          </select>
           {searchValue && (
             <p>
               Showing {filteredEpisodeData.length} of {episodeData.length} Total
