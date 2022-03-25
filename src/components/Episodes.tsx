@@ -34,7 +34,7 @@ function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
-  const [showSelect, setShowSelect] = useState<string>("Kirby Buckets");
+  const [showSelect, setShowSelect] = useState<string>("");
 
   const showDataArray: IShow[] = [...shows];
 
@@ -107,7 +107,7 @@ function Episode(): JSX.Element {
             <option value="">All Episodes</option>
             {episodeDataArray.map((oneEpi) => (
               <option value={oneEpi.name} key={oneEpi.id}>
-                {oneEpi.name + " Ep" + oneEpi.number}
+                {oneEpi.name +" S"+ oneEpi.season +" Ep" + oneEpi.number}
               </option>
             ))}
           </select>
