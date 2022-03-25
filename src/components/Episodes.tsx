@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //import episodes from "../episodes.json";
 //import simpsonseps from "../simpsonseps.json";
 import { clean } from "../utils/clean";
@@ -33,11 +33,14 @@ function Episode(): JSX.Element {
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
 
+useEffect(() => {
   const handleGetData = async () => {
     const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
     const jsonBody: IEpisode[] = await response.json();
     setEpisodeData(jsonBody);
   };
+  handleGetData();
+}, []);
 
   const episodeDataArray = [...episodeData];
 
@@ -50,7 +53,7 @@ function Episode(): JSX.Element {
       oneEpisode.name.toLowerCase().includes(epsiodeSelect.toLowerCase())
     );
   }
-  handleGetData();
+ // handleGetData();
   // function handleOnchange = (event) => {
   //   const show = event.target;
   //   setEpisodeSelect(show)
@@ -78,7 +81,9 @@ function Episode(): JSX.Element {
               setEpisodeSelect(event.target.value);
             }}
           >
-            <option>All Episodes</option>
+            <option
+            value=""
+            >All Episodes</option>
             {episodeDataArray.map((oneEpi) => (
               <option value={oneEpi.name} key={oneEpi.id}>
                 {oneEpi.name + " Ep" + oneEpi.number}
