@@ -1,8 +1,9 @@
 import { useState } from "react";
 //import episodes from "../episodes.json";
-import simpsonseps from "../simpsonseps.json";
+//import simpsonseps from "../simpsonseps.json";
 import { clean } from "../utils/clean";
 import GenerateEpisodeCode from "../utils/GenerateEpisodeCode";
+//import handleGetData from "./FetchEpisodeData";
 
 export interface IEpisode {
   id: number;
@@ -25,18 +26,29 @@ export interface IEpisode {
 
 //export const episodeData: IEpisode[] = episodes;
 
-export const episodeData = simpsonseps;
+// export const episodeData = simpsonseps;
 
 function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
-  const filteredEpisodeData = episodeData.filter(searchfunction);
+  const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
+
+  const handleGetData = async () => {
+    const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+    const jsonBody: IEpisode[] = await response.json();
+    setEpisodeData(jsonBody);
+  };
+
+  const episodeDataArray = [...episodeData];
+
+  const filteredEpisodeData = episodeDataArray.filter(searchfunction);
+
   function searchfunction(oneEpisode: IEpisode) {
     return (
       oneEpisode.name.toLowerCase().includes(searchValue.toLowerCase()) ||
       oneEpisode.summary.toLowerCase().includes(searchValue.toLowerCase())
     );
   }
-
+  handleGetData();
   return (
     <div className="page">
       <div className="Container">
