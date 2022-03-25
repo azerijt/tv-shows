@@ -34,9 +34,12 @@ function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
-  const [showSelect, setShowSelect] = useState<string>("Kirby Buckets");
+  const [showSelect, setShowSelect] = useState<string>("");
 
   const showDataArray: IShow[] = [...shows];
+  showDataArray.sort(function (a, b) {
+    return a.name > b.name ? 1 : a === b ? 0 : -1;
+  });
 
   const targetShow = showDataArray.filter(findShow);
   const thingtochange = targetShow[0].id;
