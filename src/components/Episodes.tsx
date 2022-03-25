@@ -9,7 +9,6 @@ export interface IShow {
   name: string;
   image: { medium: string; original: string };
   summary: string;
-  genre: string;
 }
 
 export interface IEpisode {
@@ -35,13 +34,19 @@ function Episode(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>("");
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
-  const [showData, setShowData] = useState<IShow[]>([]);
+  const [showSelect, setShowSelect] = useState<number>(82);
 
-  const showDataArray=[...showData]
+const showDataArray: IShow[] = shows;
+
+const targetShow = showDataArray.filter(findShow);
+
+function findShow(oneShow: IShow){
+  return (oneShow.id === (showSelect))
+}
 
   useEffect(() => {
     const handleGetData = async () => {
-      const response = await fetch(`https://api.tvmaze.com/shows/${showData.id}/episodes")`;
+      const response = await fetch(`https://api.tvmaze.com/shows/${targetShow.id}/episodes")`;
       const jsonBody: IEpisode[] = await response.json();
       setEpisodeData(jsonBody);
     };
@@ -74,9 +79,11 @@ function Episode(): JSX.Element {
             }}
           />
           <br />
-          <select name="shows" id="shows">
-            {shows.map((oneShow) => (
-              <option value={oneShow.id} key={oneShow.id}>
+          <select name="shows" id="shows"
+            onChange={(event) => {
+              setShowSelect(event.target.value)}}>
+            {showDataArray.map((oneShow) => (
+              <option value={targetShow.id} key={oneShow.id}>
                 {oneShow.name}
               </option>
             ))}
