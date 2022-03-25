@@ -33,14 +33,14 @@ function Episode(): JSX.Element {
   const [episodeData, setEpisodeData] = useState<IEpisode[]>([]);
   const [epsiodeSelect, setEpisodeSelect] = useState<string>("");
 
-useEffect(() => {
-  const handleGetData = async () => {
-    const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
-    const jsonBody: IEpisode[] = await response.json();
-    setEpisodeData(jsonBody);
-  };
-  handleGetData();
-}, []);
+  useEffect(() => {
+    const handleGetData = async () => {
+      const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+      const jsonBody: IEpisode[] = await response.json();
+      setEpisodeData(jsonBody);
+    };
+    handleGetData();
+  }, []);
 
   const episodeDataArray = [...episodeData];
 
@@ -53,7 +53,7 @@ useEffect(() => {
       oneEpisode.name.toLowerCase().includes(epsiodeSelect.toLowerCase())
     );
   }
- // handleGetData();
+  // handleGetData();
   // function handleOnchange = (event) => {
   //   const show = event.target;
   //   setEpisodeSelect(show)
@@ -81,9 +81,7 @@ useEffect(() => {
               setEpisodeSelect(event.target.value);
             }}
           >
-            <option
-            value=""
-            >All Episodes</option>
+            <option value="">All Episodes</option>
             {episodeDataArray.map((oneEpi) => (
               <option value={oneEpi.name} key={oneEpi.id}>
                 {oneEpi.name + " Ep" + oneEpi.number}
