@@ -79,13 +79,7 @@ function Episode(): JSX.Element {
         <br />
         <div className="title">
           <h1>TV Shows App</h1>
-          <input
-            placeholder="Search"
-            value={searchValue}
-            onChange={(event) => {
-              setSearchValue(event.target.value);
-            }}
-          />
+
           <br />
           <select
             name="shows"
@@ -114,6 +108,13 @@ function Episode(): JSX.Element {
               </option>
             ))}
           </select>
+          <input
+            placeholder="Search Episodes"
+            value={searchValue}
+            onChange={(event) => {
+              setSearchValue(event.target.value);
+            }}
+          />
           {searchValue && (
             <p>
               Showing {filteredEpisodeData.length} of {episodeData.length} Total
